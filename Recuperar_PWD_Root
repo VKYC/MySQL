@@ -1,0 +1,18 @@
+** En terminal 1
+1.- sudo systemctl stop myssql.service  ** detemos servicio Mysql
+ alt (b) service mysqld stop
+2.- sudo mkdir /var/run/mysqld		** Si no existe creamos directorio
+3.- sudo chown mysql: /var/run/mysqld	** Se otorgan permisos a directorio anteriormente creado
+4.- sudo mysqld_safe --skip-grant-tables --skip-networking & **se ejecuta MySql en modo serguro
+** En terminal dos, y ya ejecutando (4)
+1.- sudo mysql -u root mysql
+2.- Dentro de MySql debemos ejecutar el siguiente codigo
+UPDATE mysql.user SET authentication_string=PASSWORD('ofco110567'), plugin='mysql_native_password' WHERE User='root' AND Host='localhost';
+3.- Para terminar 
+EXIT;
+4.- Desde el mismo terminal matamos servicio
+sudo mysqladmin -S /var/run/mysqld/mysqld.sock shutdown
+5.- Iniciamos MySql en forma Normal
+sudo systemctl restart mysql.service
+6.- probamos reinicio
+sudo mysql -u root -p
